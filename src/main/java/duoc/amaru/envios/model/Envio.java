@@ -2,14 +2,13 @@ package duoc.amaru.envios.model;
 
 import java.time.LocalDate;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -22,10 +21,12 @@ public class Envio {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idEnvio;
 
-    @OneToOne(mappedBy = "envio", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Column(name = "pedido_id", unique = true)
+    @NotNull
     private Long idPedido;
 
-    @OneToOne(mappedBy = "envio", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Column(name = "direccion_id")
+    @NotNull(message = "Se requiere la dirección de envió")
     private Long direccionDestino;
 
     @Column(name = "fecha_ini")
@@ -35,11 +36,4 @@ public class Envio {
     private LocalDate fechaEntrega;
     private String estado;
     
-    public Envio(Long idPedido, Long direccionDestino, LocalDate fechaEntrega) {
-        this.idPedido = idPedido;
-        this.direccionDestino = direccionDestino;
-        this.fechaEntrega = fechaEntrega;
-        this.fechaCreacion = LocalDate.now();
-        this.estado = "Preparando";
-    }
 }
