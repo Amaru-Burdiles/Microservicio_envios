@@ -34,6 +34,7 @@ public class Envio {
 
     @Column(name = "fecha_fin")
     private LocalDate fechaEntrega;
+    
     private String estado;
     
 }
