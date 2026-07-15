@@ -39,6 +39,9 @@ public class EnvioServicio {
         e.setDireccionDestino(direccion);
         e.setFechaCreacion(LocalDate.now());
         e.setEstado(estados.get(1));
+
+        envioRepo.save(e);
+        
         return ResponseEntity.ok("Envio creado");
     }
 
