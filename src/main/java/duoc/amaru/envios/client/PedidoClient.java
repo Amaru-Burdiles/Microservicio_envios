@@ -1,20 +1,20 @@
 package duoc.amaru.envios.client;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-import duoc.amaru.envios.dto.PedidoExisteDTO;
+import duoc.amaru.envios.dto.PedidoDTO;
+import duoc.amaru.envios.dto.ResponseDTO;
 
 @Component
 public class PedidoClient {
     @Autowired
     private RestTemplate restTemplate;
 
-    public ResponseEntity<?> pedidoExiste(Long idPedido) {
-        PedidoExisteDTO existe = new PedidoExisteDTO(idPedido);
+    private String serviceUrl = "http://localhost:8085/api/ecomarket/v1/pedido";
 
-        return restTemplate.postForObject("http://localhost:8081/pedidos/buscar/", existe, ResponseEntity.class);
+    public PedidoDTO pedidoExiste(Long idPedido) {
+        return restTemplate.getForObject(serviceUrl +'/'+ idPedido, ResponseDTO.class).getBody();
     }
 }

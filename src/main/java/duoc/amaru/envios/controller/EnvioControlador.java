@@ -20,9 +20,7 @@ public class EnvioControlador {
     
     @PostMapping
     public ResponseEntity<?> postEnvio(@RequestBody CrearEnvioDTO newEnvio) {
-        Long pedido = newEnvio.getPedidoId();
-        Long direccion = newEnvio.getDireccionId();
-        return envioServicio.crearEnvio(pedido, direccion);
+        return null;
     }
     
 }

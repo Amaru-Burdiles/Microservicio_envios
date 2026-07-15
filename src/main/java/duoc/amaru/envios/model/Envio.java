@@ -7,6 +7,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -28,6 +30,10 @@ public class Envio {
     @Column(name = "direccion_id")
     @NotNull(message = "Se requiere la dirección de envió")
     private Long direccionDestino;
+
+    @OneToOne
+    @JoinColumn(name = "dir_despacho")
+    private Despacho direccionDespacho;
 
     @Column(name = "fecha_ini")
     private LocalDate fechaCreacion;
